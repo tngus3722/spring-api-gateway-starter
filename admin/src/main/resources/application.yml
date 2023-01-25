@@ -1,0 +1,33 @@
+spring:
+datasource:
+  hikari:
+    max-lifetimew: '1200000'
+    idle-timeout: '300000'
+    maximum-pool-size: '12'
+    auto-commit: 'true'
+    password: ''
+    username: sa
+    driver-class-name: org.h2.Driver
+    jdbc-url: jdbc:h2:mem:testDB
+    connection-timeout: '20000'
+    minimum-idle: '5'
+jpa:
+  properties:
+    hibernate:
+      default_batch_fetch_size: '1000'
+      format_sql: 'true'
+      dialect: org.hibernate.dialect.H2Dialect
+  generate-ddl: 'false'
+  hibernate:
+    ddl-auto: none
+  database-platform: org.hibernate.dialect.H2Dialect
+  show-sql: 'true'
+  open-in-view: false
+h2:
+  console:
+    path: /h2-console
+    enabled: 'true'
+server:
+  port: 8000
+  servlet:
+    context-path: "/admin"
