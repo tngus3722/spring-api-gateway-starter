@@ -2,4 +2,5 @@ rootProject.name = 'spring-api-gateway-starter'
 include 'support'
 include 'internal'
 include 'admin'
+include 'gateway'
 

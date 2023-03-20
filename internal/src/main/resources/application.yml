@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: api-internal
   datasource:
     hikari:
       max-lifetimew: '1200000'
