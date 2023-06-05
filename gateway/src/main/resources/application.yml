@@ -8,22 +8,31 @@ spring:
     gateway:
       routes:
         - id: api-admin
-          uri: http://localhost:8000/
+          uri: lb://API-ADMIN
           predicates:
             - Path=/admin/**
           filters:
             - name: AuthFilter
             - name: CircuitBreaker
               args:
-                name: defaultCircuitBreaker
+                name: adminCircuitBreaker
                 fallbackUri: forward:/fallback
                 statusCodes:
                   - 500
                   - 400
         - id: api-internal
-          uri: http://localhost:8100/
+          uri: lb://API-INTERNAL
           predicates:
             - Path=/internal/**
+          filters:
+            - name: AuthFilter
+            - name: CircuitBreaker
+              args:
+                name: internalCircuitBreaker
+                fallbackUri: forward:/fallback
+                statusCodes:
+                  - 500
+                  - 400
       httpclient:
         connect-timeout: 1000
         response-timeout: 3000
@@ -48,7 +57,9 @@ resilience4j:
         slowCallRateThreshold: 100 # slow call 임계값 (default: 100)
         slowCallDurationThreshold: 60000 # slow call 기준 소요시간 (default: 60_000, 60sec)
     instances:
-      defaultCircuitBreaker:
+      adminCircuitBreaker:
+        baseConfig: default
+      internalCircuitBreaker:
         baseConfig: default
 
 management:
@@ -65,3 +76,9 @@ management:
   health:
     circuitbreakers:
       enabled: true # actuator를 통해 circuitbraker 상태를 확인하기 위해 설정
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka #Eureka Server 명시

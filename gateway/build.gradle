@@ -16,6 +16,8 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j'
     // 이거 뭐더라?
     implementation("io.netty:netty-resolver-dns-native-macos:4.1.86.Final:osx-aarch_64")
+    // eureka client
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-client', version: '3.1.1'
     implementation project(':support')
 }
 

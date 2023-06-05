@@ -1,6 +1,7 @@
 spring:
   application:
-    name: api-admin
+    name: eureka-server
+
 datasource:
   hikari:
     max-lifetimew: '1200000'
@@ -30,12 +31,9 @@ h2:
     path: /h2-console
     enabled: 'true'
 server:
-  port: 8000
-  servlet:
-    context-path: "/admin"
+  port: 8761
+
 eureka:
   client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://127.0.0.1:8761/eureka #Eureka Server 명시
+    register-with-eureka: false
+    fetch-registry: false

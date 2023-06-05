@@ -3,4 +3,5 @@ include 'support'
 include 'internal'
 include 'admin'
 include 'gateway'
+include 'eureka'
 
